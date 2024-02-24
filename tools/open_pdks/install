@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e
+
+echo "[INFO] Install open_pdks"
+
+
+echo "[INFO] Updating, upgrading and installing packages with APT"
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install \
+	python3 \
+	python3-pip \
+	xz-utils
+
+python3 -m pip install --upgrade --no-cache-dir volare
+
+if [ ! -d "$PDK_ROOT" ]; then
+    mkdir -p "$PDK_ROOT"
+fi
+
+echo "[INFO] Installing SKY130 PDK."
+volare enable "${OPEN_PDKS_REPO_COMMIT}" --pdk sky130
+
+# remove version sky130B to save space (efabless TO use mostly sky130A)
+rm -rf "$PDK_ROOT"/volare/sky130/versions/*/sky130B
+rm -rf "$PDK_ROOT"/sky130B
