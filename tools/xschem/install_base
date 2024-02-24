@@ -1,0 +1,6 @@
+#!/bin/bash
+apt-get -y install \
+    git \
+    tcl8.6 \
+    tcl-tclreadline \
+    libjpeg-dev

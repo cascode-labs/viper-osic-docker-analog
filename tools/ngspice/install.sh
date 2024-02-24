@@ -1,22 +1,20 @@
 #!/bin/bash
 
 echo "[INFO] Updating, upgrading and installing packages with APT"
-apt-get -y update
-apt-get -y upgrade
 apt-get -y install \
 	bison \
     flex \
-    libX11-devel \
-    libX11-6 \
+    git \
+    libx11-dev \
     autoconf \
     automake \
     make \
+    libreadline-dev \
     libtool \
-    readline \
+    libxaw7-dev \
     tcl \
     blt \
-    fftw-3
-
+	libfftw3-dev
 REPO_COMMIT_SHORT=$(echo "$NGSPICE_REPO_COMMIT" | cut -c 1-7)
 
 git clone --filter=blob:none "${NGSPICE_REPO_URL}" "${NGSPICE_NAME}"

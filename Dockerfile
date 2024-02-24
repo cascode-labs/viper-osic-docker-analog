@@ -13,6 +13,11 @@ ENV OSIC_DOCKER_ANALOG_VERSION=${CONTAINER_TAG} \
     DESIGNS=/foss/designs \
     EXAMPLES=/foss/examples
 
+RUN apt-get -y update
+RUN apt-get -y upgrade
+COPY tools/xschem/install_base install_xschem_base
+RUN bash install_xschem_base
+
 #######################################################################
 # Create open_pdks (part of OpenLane)
 #######################################################################
@@ -68,7 +73,7 @@ RUN bash install
 #######################################################################
 # Final output container
 #######################################################################
-FROM basepkg as iic-osic-tools
+FROM base as osic-docker-analog
 
 # Connection ports for controlling the UI:
 # VNC port:5901
@@ -79,14 +84,14 @@ ENV VNC_PORT=5901 \
 EXPOSE $VNC_PORT $NO_VNC_PORT $JUPYTER_PORT
 
 # Environment config
-ENV HOME=/headless \
-    TERM=xterm \
-    STARTUPDIR=/dockerstartup \
-    NO_VNC_HOME=/usr/share/novnc \
-    VNC_COL_DEPTH=24 \
-    VNC_RESOLUTION=1680x1050 \
-    VNC_PW=abc123 \
-    VNC_VIEW_ONLY=false
+# ENV HOME=/headless \
+#     TERM=xterm \
+#     STARTUPDIR=/dockerstartup \
+#     NO_VNC_HOME=/usr/share/novnc \
+#     VNC_COL_DEPTH=24 \
+#     VNC_RESOLUTION=1680x1050 \
+#     VNC_PW=abc123 \
+#     VNC_VIEW_ONLY=false
 # FIXME workaround for OpenMPI throwing errors when run inside a container without Capability "SYS_PTRACE".
 ENV OMPI_MCA_btl_vader_single_copy_mechanism=none
 
@@ -111,4 +116,4 @@ COPY --from=xschem                       ${TOOLS}/              ${TOOLS}/
 # WORKDIR ${DESIGNS}
 # USER 1000:1000
 # ENTRYPOINT ["/dockerstartup/scripts/ui_startup.sh"]
-CMD ["--wait"]
+# CMD ["--wait"]

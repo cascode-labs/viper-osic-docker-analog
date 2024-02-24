@@ -1,24 +1,55 @@
 #!/bin/bash
 
+set -e
+
 apt-get -y install \
-    libx11-6 \          
+    git \
     libx11-dev \
-    libxrender1 \
-    libxrender-dev \
-    libxcb1 \
     libx11-xcb-dev \
-    libcairo2 \
+    libxrender-dev \
     libcairo2-dev \
     tcl8.6 \
     tcl8.6-dev \
-    tk8.6 \
-    tk8.6-dev \
+    tcl-tclreadline \
+    tk-dev \
     flex \
     bison \
-    libxpm4 \
-    libxpm-dev \
+	libxpm-dev \
     libjpeg-dev \
     xterm \
     vim-gtk3 \
-    gawk \
-    tcl-tclreadline
+    gawk
+
+
+# Debians requirements:
+    # libx11-6 \
+    # libx11-dev \
+    # libxrender1 \
+    # libxrender-dev \
+    # libxcb1 \
+    # libx11-xcb-dev \
+    # libcairo2 \
+    # libcairo2-dev \
+    # tcl8.6 \
+    # tcl8.6-dev \
+    # tk8.6 \
+    # tk8.6-dev \
+    # flex \
+    # bison \
+    # libxpm4 \
+    # libxpm-dev \
+    # libjpeg-dev \
+    # xterm \
+    # vim-gtk3 \
+    # gawk \
+    # tcl-tclreadline
+
+REPO_COMMIT_SHORT=$(echo "$XSCHEM_REPO_COMMIT" | cut -c 1-7)
+
+git clone --filter=blob:none "${XSCHEM_REPO_URL}" "${XSCHEM_NAME}"
+cd "${XSCHEM_NAME}"
+git checkout "${XSCHEM_REPO_COMMIT}"
+./configure --prefix="${TOOLS}/${XSCHEM_NAME}/${REPO_COMMIT_SHORT}"
+make -j"$(nproc)"
+make install
+
