@@ -15,8 +15,12 @@ ENV OSIC_DOCKER_ANALOG_VERSION=${CONTAINER_TAG} \
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
+
 COPY tools/xschem/install_base install_xschem_base
 RUN bash install_xschem_base
+
+# COPY tools/task/install install_task
+# RUN bash install_task
 
 #######################################################################
 # Create open_pdks (part of OpenLane)
@@ -101,7 +105,6 @@ COPY --from=ngspice                      ${TOOLS}/              ${TOOLS}/
 COPY --from=xschem                       ${TOOLS}/              ${TOOLS}/
 # COPY --from=xyce                         ${TOOLS}/              ${TOOLS}/
 # COPY --from=xyce-xdm                     ${TOOLS}/              ${TOOLS}/
-
 
 # Allow scripts to be executed by any user
 # RUN find $STARTUPDIR/scripts -name '*.sh' -exec chmod a+x {} +
