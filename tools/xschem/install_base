@@ -1,6 +1,20 @@
 #!/bin/bash
+set -e
+
 apt-get -y install \
     git \
+    libx11-dev \
+    libx11-xcb-dev \
+    libxrender-dev \
+    libcairo2-dev \
     tcl8.6 \
+    tcl8.6-dev \
     tcl-tclreadline \
-    libjpeg-dev
+    tk-dev \
+    flex \
+    bison \
+	libxpm-dev \
+    libjpeg-dev \
+    xterm \
+    vim-gtk3 \
+    gawk

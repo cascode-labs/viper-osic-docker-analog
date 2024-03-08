@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+echo "[INFO] Adding NgSpice APT Packages"
+apt-get -y install \
+	bison \
+    flex \
+    git \
+    libx11-dev \
+    autoconf \
+    automake \
+    make \
+    libreadline-dev \
+    libtool \
+    libxaw7-dev \
+    tcl \
+    blt \
+	libfftw3-dev

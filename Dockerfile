@@ -16,6 +16,9 @@ ENV OSIC_DOCKER_ANALOG_VERSION=${CONTAINER_TAG} \
 RUN apt-get -y update
 RUN apt-get -y upgrade
 
+COPY tools/ngspice/install_base install_ngspice_base
+RUN bash install_ngspice_base
+
 COPY tools/xschem/install_base install_xschem_base
 RUN bash install_xschem_base
 
@@ -39,8 +42,8 @@ FROM open_pdks as ngspice
 ARG NGSPICE_REPO_URL="https://github.com/danchitnis/ngspice-sf-mirror"
 ARG NGSPICE_REPO_COMMIT="ngspice-42"
 ARG NGSPICE_NAME="ngspice"
-COPY tools/ngspice/install.sh install.sh
-RUN bash install.sh
+COPY tools/ngspice/install install
+RUN bash install
 
 #######################################################################
 # Compile xschem
