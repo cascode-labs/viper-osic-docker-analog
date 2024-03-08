@@ -1,0 +1,19 @@
+version: '3'
+
+tasks:
+  default: 
+    cmds: 
+      - task --list-all
+  build:
+    cmds:
+      - docker build --pull --rm -f "Dockerfile"
+        -t viperosicdockeranalog:latest
+        "." 
+
+  run:
+    cmds:
+      - docker run --rm -it
+        -p 5901:5901/tcp
+        -p 80:80/tcp
+        -p 8888:8888/tcp
+        viperosicdockeranalog:latest 
