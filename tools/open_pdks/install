@@ -25,3 +25,7 @@ volare enable "${OPEN_PDKS_REPO_COMMIT}" --pdk sky130
 # remove version sky130B to save space (efabless TO use mostly sky130A)
 rm -rf "$PDK_ROOT"/volare/sky130/versions/*/sky130B
 rm -rf "$PDK_ROOT"/sky130B
+
+# Remove some of the digital std cell libraries
+rm -rf /foss/pdks/sky130A/libs.ref/sky130_sram_macros
+rm -rf /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib
