@@ -1,0 +1,9 @@
+{
+    "id": "viper-osic-docker-analog",
+    "version": "0.0.0",
+    "name": "osic-docker-analog",
+    "Description": "An analog open source integrated circuit development environment.",
+    "licenseURL": "https://opensource.org/license/mit",
+    "publisher": "Cascode-Labs",
+    "keywords": ["osic", "analog", "circuit"]
+}
