@@ -7,8 +7,11 @@ tasks:
   build:
     cmds:
       - docker build --pull --rm -f "Dockerfile"
-        -t viperosicdockeranalog:latest
+        -t ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:latest
         "." 
+  push:
+    cmds:
+      - docker push ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:latest
 
   run:
     cmds:

@@ -4,6 +4,11 @@
 ARG BASE_IMAGE=ubuntu:jammy
 FROM ${BASE_IMAGE} as base
 ARG CONTAINER_TAG=unknown
+
+LABEL org.opencontainers.image.source=https://github.com/cascode-labs/viper-ic-devcontainers
+LABEL org.opencontainers.image.licenses=MIT
+LABEL org.opencontainers.image.description="An open-source integrated circuit design for analog design"
+
 ENV OSIC_DOCKER_ANALOG_VERSION=${CONTAINER_TAG} \
     DEBIAN_FRONTEND=noninteractive \
     LC_ALL=en_US.UTF-8 \
