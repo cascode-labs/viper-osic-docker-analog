@@ -2,21 +2,30 @@ version: '3'
 
 tasks:
   default: 
+    desc: List all tasks
     cmds: 
       - task --list-all
+    
   build:
+    desc: Build the docker image
     cmds:
       - docker build --pull --rm -f "Dockerfile"
         -t ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:latest
+        -t ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:v0.1
         "." 
   push:
+    desc: Push the image to GitHub container registry
+    deps: [build]
     cmds:
       - docker push ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:latest
+      - docker push ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:v0.1
 
   run:
+    desc: Run the doker image
+    deps: [build]
     cmds:
       - docker run --rm -it
         -p 5901:5901/tcp
         -p 80:80/tcp
         -p 8888:8888/tcp
-        viperosicdockeranalog:latest 
+        ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:latest

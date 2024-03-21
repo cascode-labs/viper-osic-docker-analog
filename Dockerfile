@@ -5,7 +5,7 @@ ARG BASE_IMAGE=ubuntu:jammy
 FROM ${BASE_IMAGE} as base
 ARG CONTAINER_TAG=unknown
 
-LABEL org.opencontainers.image.source=https://github.com/cascode-labs/viper-ic-devcontainers
+LABEL org.opencontainers.image.source=https://github.com/cascode-labs/viper-osic-docker-analog
 LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.description="An open-source integrated circuit design for analog design"
 
@@ -113,6 +113,9 @@ COPY --from=ngspice                      ${TOOLS}/              ${TOOLS}/
 COPY --from=xschem                       ${TOOLS}/              ${TOOLS}/
 # COPY --from=xyce                         ${TOOLS}/              ${TOOLS}/
 # COPY --from=xyce-xdm                     ${TOOLS}/              ${TOOLS}/
+
+COPY tools/tools.bashrc /foss/tools/tools.bashrc
+RUN echo 'source /foss/tools/tools.bashrc' >> ~/.bashrc
 
 # Allow scripts to be executed by any user
 # RUN find $STARTUPDIR/scripts -name '*.sh' -exec chmod a+x {} +
