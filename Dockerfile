@@ -27,6 +27,9 @@ RUN bash install_ngspice_base
 COPY tools/xschem/install_base install_xschem_base
 RUN bash install_xschem_base
 
+COPY tools/klayout/install_base install_klayout_base
+RUN bash install_klayout_base
+
 # COPY tools/task/install install_task
 # RUN bash install_task
 
@@ -83,6 +86,17 @@ RUN bash install
 
 
 #######################################################################
+# Compile klayout (part of OpenLane)
+#######################################################################
+FROM base as klayout
+ARG KLAYOUT_REPO_URL="https://github.com/KLayout/klayout"
+ARG KLAYOUT_REPO_COMMIT="v0.28.15"
+ARG KLAYOUT_NAME="klayout"
+COPY tools/klayout/install.sh install.sh
+RUN bash install.sh
+
+
+#######################################################################
 # Final output container
 #######################################################################
 FROM base as osic-docker-analog
@@ -113,6 +127,7 @@ COPY --from=ngspice                      ${TOOLS}/              ${TOOLS}/
 COPY --from=xschem                       ${TOOLS}/              ${TOOLS}/
 # COPY --from=xyce                         ${TOOLS}/              ${TOOLS}/
 # COPY --from=xyce-xdm                     ${TOOLS}/              ${TOOLS}/
+COPY --from=klayout                      ${TOOLS}/              ${TOOLS}/
 
 COPY tools/tools.bashrc /foss/tools/tools.bashrc
 RUN echo 'source /foss/tools/tools.bashrc' >> ~/.bashrc
