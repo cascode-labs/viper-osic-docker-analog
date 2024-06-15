@@ -21,6 +21,9 @@ ENV OSIC_DOCKER_ANALOG_VERSION=${CONTAINER_TAG} \
 RUN apt-get -y update
 RUN apt-get -y upgrade
 
+COPY tools/task/install_base install_task_base
+RUN bash install_task_base
+
 COPY tools/ngspice/install_base install_ngspice_base
 RUN bash install_ngspice_base
 
