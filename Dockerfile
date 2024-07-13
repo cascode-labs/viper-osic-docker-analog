@@ -19,6 +19,8 @@ ENV OSIC_DOCKER_ANALOG_VERSION=${CONTAINER_TAG} \
     EXAMPLES=/foss/examples
 
 RUN apt-get -y update
+RUN apt-get install -y apt-transport-https
+RUN apt-get -y update
 RUN apt-get -y upgrade
 
 COPY tools/task/install_base install_task_base
