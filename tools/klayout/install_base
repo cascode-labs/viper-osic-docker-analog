@@ -2,7 +2,7 @@
 set -e
 
 echo "[INFO] Adding Klayout APT Packages"
-apt-get -y install \
+apt-get -y install --fix-missing \
     gcc \
     g++ \
     make \
@@ -18,3 +18,5 @@ apt-get -y install \
     python3-dev \
     libz-dev \
     libgit2-dev
+
+strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
