@@ -11,14 +11,14 @@ tasks:
     cmds:
       - docker build --pull --rm -f "Dockerfile"
         -t ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:latest
-        -t ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:v0.2
+        -t ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:v0.3
         "." 
   push:
     desc: Push the image to GitHub container registry
     deps: [build]
     cmds:
       - docker push ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:latest
-      - docker push ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:v0.2
+      - docker push ghcr.io/cascode-labs/viper-osic-docker-analog/osic-docker-analog:v0.3
 
   run:
     desc: Run the doker image
